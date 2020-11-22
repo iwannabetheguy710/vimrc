@@ -1,8 +1,6 @@
 " Vim with all enhancements
 source $VIMRUNTIME/vimrc_example.vim
 
-set t_Co=8 t_md=
-
 " Use the internal diff if available.
 " Otherwise use the special 'diffexpr' for Windows.
 if &diffopt !~# 'internal'
@@ -43,18 +41,14 @@ endfunction
 
 set lines=32
 set columns=145
-" Don't try to be vi compatible
 set nocompatible
 
-" Helps force plugins to load correctly when it is turned back on below
 filetype off
 
 " TODO: Load plugins here (pathogen or vundle)
 
-" Turn on syntax highlighting
 syntax on
 
-" For plugins to load correctly
 filetype plugin indent on
 
 " Encoding
@@ -74,10 +68,30 @@ au GUIEnter * simalt ~x
 set hls
 set is
 set cb=unnamed
-set gfn=Fixedsys:h9
+set gfn=DejaVu_Sans_Mono:h10
+set background=light
+colorscheme solarized
 set ts=4
 set sw=4
-set si
+
+" status bar
+set laststatus=2
+set statusline=
+set statusline+=%{(mode()=='n')?'\ \ NORMAL\ ':''}
+set statusline+=%{(mode()=='i')?'\ \ INSERT\ ':''}
+set statusline+=%{(mode()=='r')?'\ \ RPLACE\ ':''}
+set statusline+=%{(mode()=='v')?'\ \ VISUAL\ ':''}
+set statusline+=\ %n\           " buffer number
+set statusline+=%{&paste?'\ PASTE\ ':''}
+set statusline+=%{&spell?'\ SPELL\ ':''}
+set statusline+=%R                        " readonly flag
+set statusline+=%M                        " modified [+] flag
+set statusline+=\ %t\                   " short file name
+set statusline+=%=                          " right align
+set statusline+=\ %Y\                   " file type
+set statusline+=\ %3l:%-2c\         " line + column
+set statusline+=\ %3p%%\                " percentage
+
 cd C:\Users\pydev\Documents\training\C++
 
 inoremap { {}<Left>
@@ -85,14 +99,12 @@ inoremap {<CR> {<CR>}<Esc>O
 inoremap {{ {
 inoremap {} {}
 
-"autocmd FileType cpp nnoremap <buffer><F9> :w <bar> !g++ -std=c++17 % -o %:r -O2 -DLOCAL -Wall<CR><CR>
-"autocmd FileType cpp nnoremap <buffer><C-C> :s/^\(\s*\)/\1\/\/<CR> :s/^\(\s*\)\/\/\/\//\1<CR> $
 nnoremap <F10> :!%:r<CR><CR>
 command Cpy :%y+
 
 augroup cppfile
     autocmd!
-    autocmd FileType cpp nnoremap <buffer><F9> :w <bar> !g++ -std=c++17 % -o %:r -O2 -DLOCAL -Wall<CR><CR>
+    autocmd FileType cpp nnoremap <buffer><F9> :w <bar> !g++ % -o %:r -std=c++17<CR><CR>
     autocmd FileType cpp nnoremap <buffer><C-C> :s/^\(\s*\)/\1\/\/<CR> :s/^\(\s*\)\/\/\/\//\1<CR> $
 augroup END
 
