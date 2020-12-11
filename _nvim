@@ -1,0 +1,54 @@
+filetype off
+
+set nu
+
+syntax on
+filetype plugin indent on
+set encoding=utf-8
+set fileencoding=utf-8
+
+set noswapfile
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set noshiftround
+
+"auto complete {} quotes
+inoremap { {}<Left>
+inoremap {<CR> {<CR>}<Esc>O
+inoremap {{ {
+inoremap {} {}
+
+nnoremap <F9> :w <bar> !g++ % -o %:r -std=c++17 -D_iwannabetheguy<CR>
+nnoremap <F5> :!./%:r <CR>
+nnoremap <buffer><C-C> :s/^\(\s*\)/\1\/\/<CR> :s/^\(\s*\)\/\/\/\//\1<CR> $
+
+command Compile :!g++ % -o %:r -std=c++17 -D_iwannabetheguy
+command Run :!./%:r
+command Cpy :%y+
+
+"status bar
+set laststatus=2
+set statusline=
+set statusline+=%{(mode()=='n')?'\ \ NORMAL\ ':''}
+set statusline+=%{(mode()=='i')?'\ \ INSERT\ ':''}
+set statusline+=%{(mode()=='r')?'\ \ RPLACE\ ':''}
+set statusline+=%{(mode()=='v')?'\ \ VISUAL\ ':''}
+set statusline+=\ %n\           " buffer number
+set statusline+=%{&paste?'\ PASTE\ ':''}
+set statusline+=%{&spell?'\ SPELL\ ':''}
+set statusline+=%R                        " readonly flag
+set statusline+=%M                        " modified [+] flag
+set statusline+=\ %t\                   " short file name
+set statusline+=%=                          " right align
+set statusline+=\ %Y\                   " file type
+set statusline+=\ %3l:%-2c\         " line + column
+set statusline+=\ %3p%%\                " percentage<Paste>
+
+"numbber toggle
+augroup numbertoggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave * set rnu
+    autocmd BufLeave,FocusLost,InsertEnter * set nornu
+augroup END
