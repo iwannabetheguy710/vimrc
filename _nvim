@@ -1,3 +1,5 @@
+set rtp+=~/.vim/bundle/Vundle.vim
+
 filetype off
 
 set nu
@@ -20,31 +22,29 @@ inoremap {<CR> {<CR>}<Esc>O
 inoremap {{ {
 inoremap {} {}
 
-nnoremap <F9> :w <bar> !g++ % -o %:r -std=c++17 -D_iwannabetheguy<CR>
+nnoremap <F9> :w <bar> !g++ % -o %:r -std=c++17 -DLOCAL<CR>
 nnoremap <F5> :!./%:r <CR>
 nnoremap <buffer><C-C> :s/^\(\s*\)/\1\/\/<CR> :s/^\(\s*\)\/\/\/\//\1<CR> $
 
-command Compile :!g++ % -o %:r -std=c++17 -D_iwannabetheguy
+command Compile :!g++ % -o %:r -std=c++17 -DLOCAL
 command Run :!./%:r
 command Cpy :%y+
 
+set t_Co=256
+
 "status bar
 set laststatus=2
-set statusline=
-set statusline+=%{(mode()=='n')?'\ \ NORMAL\ ':''}
-set statusline+=%{(mode()=='i')?'\ \ INSERT\ ':''}
-set statusline+=%{(mode()=='r')?'\ \ RPLACE\ ':''}
-set statusline+=%{(mode()=='v')?'\ \ VISUAL\ ':''}
-set statusline+=\ %n\           " buffer number
-set statusline+=%{&paste?'\ PASTE\ ':''}
-set statusline+=%{&spell?'\ SPELL\ ':''}
-set statusline+=%R                        " readonly flag
-set statusline+=%M                        " modified [+] flag
-set statusline+=\ %t\                   " short file name
-set statusline+=%=                          " right align
-set statusline+=\ %Y\                   " file type
-set statusline+=\ %3l:%-2c\         " line + column
-set statusline+=\ %3p%%\                " percentage<Paste>
+
+" Plugin
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+call vundle#end()
+
+let g:airline_theme='solarized'
+let g:airline_powerline_fonts=1
+let g:airline#extensions#whitespace#enabled=0
 
 "numbber toggle
 augroup numbertoggle
