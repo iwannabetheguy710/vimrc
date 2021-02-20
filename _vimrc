@@ -68,7 +68,7 @@ au GUIEnter * simalt ~x
 set hls
 set is
 set cb=unnamed
-set gfn=DejaVu_Sans_Mono:h10
+set gfn=Fixedsys:h18
 set ts=4
 set sw=4
 
