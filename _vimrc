@@ -69,30 +69,8 @@ set hls
 set is
 set cb=unnamed
 set gfn=DejaVu_Sans_Mono:h10
-set background=light
-colorscheme solarized
 set ts=4
 set sw=4
-
-" status bar
-set laststatus=2
-set statusline=
-set statusline+=%{(mode()=='n')?'\ \ NORMAL\ ':''}
-set statusline+=%{(mode()=='i')?'\ \ INSERT\ ':''}
-set statusline+=%{(mode()=='r')?'\ \ RPLACE\ ':''}
-set statusline+=%{(mode()=='v')?'\ \ VISUAL\ ':''}
-set statusline+=\ %n\           " buffer number
-set statusline+=%{&paste?'\ PASTE\ ':''}
-set statusline+=%{&spell?'\ SPELL\ ':''}
-set statusline+=%R                        " readonly flag
-set statusline+=%M                        " modified [+] flag
-set statusline+=\ %t\                   " short file name
-set statusline+=%=                          " right align
-set statusline+=\ %Y\                   " file type
-set statusline+=\ %3l:%-2c\         " line + column
-set statusline+=\ %3p%%\                " percentage
-
-cd C:\Users\pydev\Documents\training\C++
 
 inoremap { {}<Left>
 inoremap {<CR> {<CR>}<Esc>O
@@ -100,7 +78,6 @@ inoremap {{ {
 inoremap {} {}
 
 nnoremap <F10> :!%:r<CR><CR>
-command Cpy :%y+
 
 augroup cppfile
     autocmd!
