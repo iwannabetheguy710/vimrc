@@ -17,18 +17,14 @@ set expandtab
 set noshiftround
 
 "auto complete {} quotes
-inoremap { {}<Left>
-inoremap {<CR> {<CR>}<Esc>O
-inoremap {{ {
-inoremap {} {}
+"inoremap { {}<Left>
+"inoremap {<CR> {<CR>}<Esc>O
+"inoremap {{ {
+"inoremap {} {}
 
-nnoremap <F9> :w <bar> !g++ % -o %:r -std=c++17 -DLOCAL<CR>
+nnoremap <F9> :w <bar> !g++ % -o %:r -std=c++17 -O2 -Wall -Wshadow -Wextra -pedantic -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unused-result -Wno-sign-conversion -fsanitize=address -fsanitize=undefined -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize-recover=all -fstack-protector-all -D_FORTIFY_SOURCE=2 -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC<CR>
 nnoremap <F5> :!./%:r <CR>
 nnoremap <buffer><C-C> :s/^\(\s*\)/\1\/\/<CR> :s/^\(\s*\)\/\/\/\//\1<CR> $
-
-command Compile :!g++ % -o %:r -std=c++17 -DLOCAL
-command Run :!./%:r
-command Cpy :%y+
 
 set t_Co=256
 
@@ -40,7 +36,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'jiangmiao/auto-pairs'
 call vundle#end()
+
+set background=light
 
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts=1
